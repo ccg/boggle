@@ -1,1 +1,33 @@
-<p>This is the partial for view 1.</p>
+<div>
+    <div>
+        <button ng-click="reset()">Reset game board</button>
+        <button ng-click="randomize()">Randomize game board</button>
+    </div>
+    <div>
+        <table>
+            <tr ng-repeat="row in board track by $index">
+                <td ng-repeat="cell in row track by $index">
+                    <input type="text"
+                           ng-model="board[$parent.$index][$index]"
+                           maxlength="1">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <button ng-click="findWords()">Find words!</button>
+    </div>
+    <div>
+        {{ board }}
+    </div>
+    <div>
+        Words found:
+        <br>
+        {{ wordsFound }}
+    </div>
+    <div>
+        Words not found:
+        <br>
+        {{ wordsNotFound }}
+    </div>
+</div>
