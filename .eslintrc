@@ -1,0 +1,12 @@
+{
+    "extends": "crockford",
+    "globals": {
+        "angular": false,
+        "beforeEach": false,
+        "describe": false,
+        "expect": false,
+        "inject": false,
+        "it": false,
+        "module": false
+    }
+}
