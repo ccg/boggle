@@ -4,9 +4,8 @@
     angular
         .module('Boggle')
         .controller('MainController', ['$log', '$scope', 'Random', function ($log, $scope, Random) {
-            var N = 3;
+            var BOARD_SIZE = 4;
 
-            $scope.N = N;
             $scope.board = [];
             $scope.dictionary = [
                 'foo',
@@ -16,7 +15,7 @@
             ];
             $scope.wordsFound = [];
             $scope.wordsNotFound = [];
-            $scope.columnNumbers = _.range(1, N + 1);
+            $scope.columnNumbers = _.range(1, BOARD_SIZE + 1);
             // If the board is ever non-square, adjust this:
             $scope.rowNumbers = $scope.columnNumbers;
 
@@ -27,20 +26,19 @@
             init();
 
             function init() {
-                var i;
+                var i,
+                    row = [],
+                    board = [],
+                    boardSizeWithPadding = BOARD_SIZE + 2;
 
-                $scope.board = [
-                    ['.', '.', '.', '.', '.'],
-                    ['.', '.', '.', '.', '.'],
-                    ['.', '.', '.', '.', '.'],
-                    ['.', '.', '.', '.', '.'],
-                    ['.', '.', '.', '.', '.']
-                ];
-                /*$scope.board = [];
+                for (i = 0; i < boardSizeWithPadding; i += 1) {
+                    row.push('.');
+                }
+                for (i = 0; i < boardSizeWithPadding; i += 1) {
+                    board.push(angular.copy(row));
+                }
 
-                for (i = 0; i < N; i += 1) {
-                    $scope.board.push([]);
-                }*/
+                $scope.board = board;
 
                 reset();
             }
@@ -95,10 +93,9 @@
                     [i + 1, j + 1]
                 ];
                 var adjacentCellIndex;
-                var numberOfAdjacentCells = adjacentCells.length; // always 8
-                // $log.log('num adj cells: ' + numberOfAdjacentCells);
 
                 var childWordFragment = wordFragment.slice(1);
+                // Check all 8 adjacent cells: 3 above, 3 below, one left, one right.
                 for (adjacentCellIndex = 0; adjacentCellIndex < 8; adjacentCellIndex += 1) {
                     var adjacentCell = adjacentCells[adjacentCellIndex];
                     var adjacentI = adjacentCell[0];
@@ -108,8 +105,6 @@
                     }
                 }
                 return false;
-                // copy mask then in child's copy mark current cell as already visited
-                // f(board, wordFragment[0:], i+1, j...)
             }
 
             function isOnBoard(board, word) {
@@ -128,15 +123,29 @@
 
                 word = word.toUpperCase();
 
-                visited = [
-                    [1, 1, 1, 1, 1],
-                    [1, 0, 0, 0, 1],
-                    [1, 0, 0, 0, 1],
-                    [1, 0, 0, 0, 1],
-                    [1, 1, 1, 1, 1]
-                ];
+                // visited = [
+                //     [1, 1, 1, 1, 1],
+                //     [1, 0, 0, 0, 1],
+                //     [1, 0, 0, 0, 1],
+                //     [1, 0, 0, 0, 1],
+                //     [1, 1, 1, 1, 1]
+                // ];
+                visited = [];
+                var ones = _.range(0, BOARD_SIZE + 2);
+                _.fill(ones, 1);
+                var middle = angular.copy(ones);
+                _.fill(middle, 0);
+                middle[0] = 1;
+                middle[BOARD_SIZE + 1] = 1;
 
-                max = N + 1;
+                visited.push(angular.copy(ones));
+                max = BOARD_SIZE + 1;
+                for (i = 1; i < max; i += 1) {
+                    visited.push(angular.copy(middle));
+                }
+                visited.push(angular.copy(ones));
+
+                max = BOARD_SIZE + 1;
                 for (i = 1; i < max; i += 1) {
                     for (j = 1; j < max; j += 1) {
                         if (f(board, visited, word, i, j)) {
@@ -146,29 +155,12 @@
                     }
                 }
                 return false;
-                return f(board, visited, word, 1, 1);
-
-                for (w = 0; w < wordLength; w += 1) {
-                    letter = word[w];
-                    for (i = 0; i < N; i += 1) {
-                        for (j = 0; j < N; j += 1) {
-                            if (letter === board[i][j]) {
-                                $log.log('letter ' + letter);
-                                $log.log('board char ' + board[i][j]);
-                                $log.log('i: ' + i + ' j: ' + j);
-                                $log.log('word: ' + word);
-                                return true;
-                            }
-                        }
-                    }
-                }
-                return false;
             }
 
             function randomize() {
                 var i,
                     j,
-                    max = N + 1;
+                    max = BOARD_SIZE + 1;
 
                 for (i = 1; i < max; i += 1) {
                     for (j = 1; j < max; j += 1) {
@@ -180,7 +172,7 @@
             function reset() {
                 var i,
                     j,
-                    max = N + 1;
+                    max = BOARD_SIZE + 1;
 
                 $scope.wordsFound = [];
                 $scope.wordsNotFound = [];
