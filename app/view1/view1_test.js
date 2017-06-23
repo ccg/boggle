@@ -3,7 +3,7 @@ describe('MainController', function () {
 
     beforeEach(module('Boggle'));
 
-    describe('some method', function () {
+    xdescribe('some method', function () {
 
         it('should ....', inject(function ($controller) {
             //spec body
