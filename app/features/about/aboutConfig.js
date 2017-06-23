@@ -5,7 +5,7 @@
         .module('Boggle')
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/about', {
-                templateUrl: 'about/about.html'
+                templateUrl: 'features/about/about.html'
             });
         }]);
 }());
