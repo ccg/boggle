@@ -6,7 +6,7 @@
 
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/main', {
-                templateUrl: 'view1/view1.html',
+                templateUrl: 'main/main.html',
                 controller: 'MainController'
             });
         }])
