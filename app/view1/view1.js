@@ -11,7 +11,7 @@
             });
         }])
 
-        .controller('MainController', ['$log', '$scope', function ($log, $scope) {
+        .controller('MainController', ['$log', '$scope', 'Random', function ($log, $scope, Random) {
             var N = 3;
 
             $scope.N = N;
@@ -41,18 +41,6 @@
                 }
 
                 reset();
-            }
-
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-            function getRandomIntInclusive(min, max) {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            }
-
-            function getRandomLetter() {
-                var asciiValue = getRandomIntInclusive(65, 90);
-                return String.fromCharCode(asciiValue);
             }
 
             function findWords() {
@@ -132,7 +120,7 @@
 
                 for (i = 0; i < N; i += 1) {
                     for (j = 0; j < N; j += 1) {
-                        $scope.board[i][j] = getRandomLetter();
+                        $scope.board[i][j] = Random.getRandomLetter();
                     }
                 }
             }
