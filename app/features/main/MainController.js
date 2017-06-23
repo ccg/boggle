@@ -16,6 +16,9 @@
             ];
             $scope.wordsFound = [];
             $scope.wordsNotFound = [];
+            $scope.columnNumbers = _.range(1, N + 1);
+            // If the board is ever non-square, adjust this:
+            $scope.rowNumbers = $scope.columnNumbers;
 
             $scope.findWords = findWords;
             $scope.randomize = randomize;

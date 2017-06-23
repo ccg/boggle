@@ -1,25 +1,32 @@
 <div>
     <div>
-        <button ng-click="reset()">Reset game board</button>
-        <button ng-click="randomize()">Randomize game board</button>
+        <div>
+            <button ng-click="reset()">Reset game board</button>
+        </div>
+        <div>
+            <button ng-click="randomize()">Randomize game board</button>
+        </div>
+        <div>
+            <button ng-click="findWords()">Find words!</button>
+        </div>
     </div>
     <div>
         <table>
-            <tr ng-repeat="row in board track by $index">
-                <td ng-repeat="cell in row track by $index">
+            <tr>
+                <td class="edge">&nbsp;</td>
+                <td class="edge" ng-repeat="columnNumber in columnNumbers">{{ columnNumber }}</td>
+            </tr>
+            <tr ng-repeat="rowNumber in rowNumbers">
+                <td class="edge">{{ rowNumber }}</td>
+                <td ng-repeat="columnNumber in columnNumbers">
                     <input type="text"
-                           ng-model="board[$parent.$index][$index]"
+                           ng-model="board[rowNumber][columnNumber]"
                            maxlength="1">
                 </td>
             </tr>
         </table>
     </div>
-    <div>
-        <button ng-click="findWords()">Find words!</button>
-    </div>
-    <div>
-        {{ board }}
-    </div>
+
     <div>
         Words found:
         <br>

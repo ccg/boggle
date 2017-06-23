@@ -24,8 +24,19 @@
   padding-right: 0.3em;
 }
 
-td > input {
+td {
+    border: 1px solid gray;
     height: 50px;
     width: 50px;
     text-align: center;
+}
+
+td.edge {
+    background-color: lightgray;
+}
+
+td > input {
+    border: none;
+    text-align: center;
+    width: 45px;
 }
