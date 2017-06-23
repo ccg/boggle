@@ -2,12 +2,9 @@
     'use strict';
 
     angular
-        .module('myApp', [
+        .module('Boggle', [
             'ngRoute',
-            'ui.bootstrap',
-            'myApp.main',
-            'myApp.view2',
-            'myApp.version'
+            'ui.bootstrap'
         ])
         .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
             $locationProvider.hashPrefix('!');

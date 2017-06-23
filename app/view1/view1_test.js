@@ -1,13 +1,13 @@
-describe('myApp.view1 module', function () {
+describe('MainController', function () {
     'use strict';
 
-    beforeEach(module('myApp.view1'));
+    beforeEach(module('Boggle'));
 
-    describe('view1 controller', function () {
+    describe('some method', function () {
 
         it('should ....', inject(function ($controller) {
             //spec body
-            var view1Ctrl = $controller('View1Ctrl');
+            var view1Ctrl = $controller('MainController');
             expect(view1Ctrl).toBeDefined();
         }));
 

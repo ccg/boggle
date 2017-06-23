@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('myApp.main', ['ngRoute'])
+        .module('Boggle')
 
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/main', {
@@ -83,7 +83,7 @@
                     return true;
                 }
                 // else wordLength > 1
-                // copy mask then in child's copy mark current sell as already visited
+                // copy mask then in child's copy mark current cell as already visited
                 // f(board, wordFragment[0:], i+1, j...)
             }
 
@@ -91,10 +91,18 @@
                 var letter,
                     i,
                     j,
+                    visited,
                     w,
                     wordLength = word.length;
 
-                var visited = [
+                if (wordLength < 3) {
+                    $log.error('Words must be at least 3 letters long.');
+                    return false;
+                }
+
+                word = word.toUpperCase();
+
+                visited = [
                     [1, 1, 1, 1, 1],
                     [1, 0, 0, 0, 1],
                     [1, 0, 0, 0, 1],
@@ -102,13 +110,8 @@
                     [1, 1, 1, 1, 1]
                 ];
 
-                if (wordLength < 3) {
-                    $log.error('Words must be at least 3 letters long.');
-                    return false;
-                }
-
                 for (w = 0; w < wordLength; w += 1) {
-                    letter = word[w].toUpperCase();
+                    letter = word[w];
                     for (i = 0; i < N; i += 1) {
                         for (j = 0; j < N; j += 1) {
                             if (letter === board[i][j]) {
