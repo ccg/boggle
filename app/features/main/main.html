@@ -1,16 +1,16 @@
-<div>
-    <div>
-        <div>
-            <button ng-click="reset()">Reset game board</button>
-        </div>
-        <div>
-            <button ng-click="randomize()">Randomize game board</button>
-        </div>
-        <div>
-            <button ng-click="findWords()">Find words!</button>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <button ng-click="reset()">Reset game board</button>
+        <button ng-click="randomize()">Randomize game board</button>
     </div>
-    <div>
+    <div class="col-md-3">
+        <button ng-click="findWords()">Find words!</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Boggle</h3>
         <table>
             <tr>
                 <td class="edge">&nbsp;</td>
@@ -27,14 +27,21 @@
         </table>
     </div>
 
-    <div>
-        Words found:
-        <br>
-        {{ wordsFound }}
+    <div class="col-md-3">
+        <h3>Words found: {{ wordsFound.length }}</h3>
+        <select disabled="disabled"
+                multiple="multiple"
+                ng-model="fake1"
+                ng-options="word for word in wordsFound">
+        </select>
     </div>
-    <div>
-        Words not found:
-        <br>
-        {{ wordsNotFound }}
+
+    <div class="col-md-3">
+        <h3>Dictionary</h3>
+        <select disabled="disabled"
+                multiple="multiple"
+                ng-model="fake2"
+                ng-options="word for word in dictionary">
+        </select>
     </div>
 </div>

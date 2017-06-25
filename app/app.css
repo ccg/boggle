@@ -40,3 +40,7 @@ td > input {
     text-align: center;
     width: 45px;
 }
+
+select {
+    width: 100%;
+}
