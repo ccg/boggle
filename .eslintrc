@@ -1,6 +1,7 @@
 {
     "extends": "crockford",
     "globals": {
+        "_": false,
         "angular": false,
         "beforeEach": false,
         "describe": false,
@@ -8,5 +9,8 @@
         "inject": false,
         "it": false,
         "module": false
+    },
+    "rules": {
+        "no-use-before-define": "off"
     }
 }

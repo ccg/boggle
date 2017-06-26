@@ -20,7 +20,8 @@
                 <td class="edge">{{ rowNumber }}</td>
                 <td ng-repeat="columnNumber in columnNumbers">
                     <input type="text"
-                           ng-model="board[rowNumber][columnNumber]"
+                           ng-change="uppercase(rowNumber, columnNumber)"
+                           ng-model="Board.getBoard()[rowNumber][columnNumber]"
                            maxlength="1">
                 </td>
             </tr>
